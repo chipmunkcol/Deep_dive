@@ -13,13 +13,18 @@ const Cart = () => {
 }
 
 const Container = styled.div`
-width: 6rem;
+width: 14rem;
 height: 4rem;
 display: flex;
 justify-content: center;
 align-items: center;
-gap: 2%;
+border-radius: 23px;
+gap: 6%;
 background-color: #411504;
+font-size: 18px;
+@media (max-width: 768px) {
+    font-size: 14px;
+}
 `
 const CartImg = styled.div`
 /* background-image: url();
@@ -33,21 +38,17 @@ background-color: teal;
 }
 `
 const Title = styled.div`
-font-size: 24px;
-@media (max-width: 768px) {
-    font-size: 16px;
-}
 `
 const CountBox = styled.div`
-width: 1rem;
-height: 1rem;
+width: 37px;
+height: 28px;
 background-color: #8a2b06;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 15px;
 `
 const Count = styled.div`
-font-size: 24px;
-@media (max-width: 768px) {
-    font-size: 16px;
-}
 `
 
 export default Cart;
