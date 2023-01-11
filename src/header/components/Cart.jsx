@@ -23,6 +23,8 @@ gap: 6%;
 background-color: #411504;
 font-size: 18px;
 @media (max-width: 768px) {
+    width: 10rem;
+    height: 3rem;
     font-size: 14px;
 }
 `
