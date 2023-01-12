@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-const Cart = () => {
+const Cart = ({setCartModal}) => {
     return(
-        <Container>
+        <Container onClick={()=>{setCartModal(true)}}>
             <CartImg />
             <Title>Your Cart</Title>
             <CountBox>
@@ -22,6 +22,7 @@ border-radius: 23px;
 gap: 6%;
 background-color: #411504;
 font-size: 18px;
+cursor: pointer;
 @media (max-width: 768px) {
     width: 10rem;
     height: 3rem;

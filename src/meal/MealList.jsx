@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DUMMY_MEALS } from "../api/api";
 import Meal from "./components/Meal";
 
-const MealList = () => {
+const MealList = ({setCartList}) => {
 
     return(
         <Wrap>
@@ -11,6 +11,7 @@ const MealList = () => {
                 <Meal
                 key={meal.id} 
                 meal={meal}
+                setCartList={setCartList}
                 />)}
             </Container>
         </Wrap>

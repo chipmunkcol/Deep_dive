@@ -1,15 +1,27 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const CartInfo = () => {
+const CartInfo = ({meal, setCartList}) => {
+
+const [cartNum, setCartNum] = useState(1)
+const addCart = () => {
+    for (let i=0; i<cartNum; i++) {
+        setCartList(prev => [...prev, meal])
+    }
+}
+
     return(
         <Box>
             <div>
                 <Amount>Amount</Amount>
                 <AmountInput 
                 type="number"
+                value={cartNum}
+                onChange={(e)=>{setCartNum(e.target.value)}}
                 />
             </div>
-            <AddBtn>+ Add</AddBtn>
+            
+            <AddBtn onClick={addCart}>+ Add</AddBtn>
         </Box>
     )
 }
