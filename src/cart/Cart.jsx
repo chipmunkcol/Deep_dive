@@ -75,10 +75,17 @@ animation: ${slide} 300ms ease-out forwards;
 const TotalAmount = styled.div`
 display: flex;
 justify-content: space-between;
+color: orange;
+@media (max-width:768px){
+    margin-top: 7px;
+}
 `
 const Amount = styled.div`
 font-size: 30px;
 font-weight: 700;
+@media (max-width: 768px) {
+    font-size: 19px;
+}
 `
 const Price = styled(Amount)`
 

@@ -32,8 +32,10 @@ const deleteItem = () => {
         <Wrap>
             <ItemBox>
                 <Title>{Item.name}</Title>
-                <Price>${Item.price}</Price>
-                <Count>{Item.count}</Count>
+                <Flex>
+                    <Price>${Item.price}</Price>
+                    <Count>x{Item.count}</Count>
+                </Flex>
             </ItemBox>
             <BtnBox>
                 <MinusBtn onClick={deleteItem}>-</MinusBtn>
@@ -51,19 +53,34 @@ justify-content: space-between;
 border-bottom: 3px solid #8a2b06;
 `
 const ItemBox = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
 `
+
 const Title = styled.div`
 font-size: 24px;
 font-weight: 700;
+@media (max-width: 768px) {
+font-size: 18px;
+margin-top: 10px;
+}
+`
+const Flex = styled.div`
+display: flex;
+margin-top: 5px;
 `
 const Price = styled.div`
 font-weight: 700;
 color: #8a2b06;
 `
-const Count = styled.div``
+const Count = styled.div`
+width: 30px;
+height: 20px;
+border: 1px solid gray;
+border-radius: 8px;
+margin-left: 1vw;
+display: flex;
+justify-content: center;
+align-items: center;
+`
 const BtnBox = styled.div`
 display: flex;
 justify-content: center;
