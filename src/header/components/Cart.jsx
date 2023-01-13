@@ -1,5 +1,5 @@
-import { useContext, useEffect, useMemo } from "react";
-import styled from "styled-components";
+import { useContext, useEffect, useMemo, useState } from "react";
+import styled, { keyframes } from "styled-components";
 import { MyStore } from "../../store/myStore";
 
 const Cart = () => {
@@ -14,8 +14,21 @@ const countCartItem = () => {
 
 const totalItem = countCartItem();
 
+const [animation, setAnimation] = useState(false)
+
+useEffect(()=>{
+    setAnimation(true);
+    
+    setTimeout(() => {
+        setAnimation(false)
+    }, 300);
+},[cartList])
+
     return(
-        <Container onClick={()=>{setCartModal(true)}}>
+        <Container
+        animation={animation} 
+        onClick={()=>{setCartModal(true);}}
+        >
             <CartImg />
             <Title>Your Cart</Title>
             <CountBox>
@@ -24,6 +37,22 @@ const totalItem = countCartItem();
         </Container>
     )
 }
+
+const sizeMove = keyframes`
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+
+`
 
 const Container = styled.div`
 width: 14rem;
@@ -36,6 +65,7 @@ gap: 6%;
 background-color: #411504;
 font-size: 18px;
 cursor: pointer;
+animation: ${props => props.animation ? sizeMove : null} 0.3s;
 @media (max-width: 768px) {
     width: 10rem;
     height: 3rem;
