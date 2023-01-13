@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Cart from "./components/Cart";
 import Logo from "./components/Logo";
 
-const Header = ({setCartModal}) => {
+const Header = () => {
     return(
         <Wrap>
             <Logo />
-            <Cart setCartModal={setCartModal}/>
+            <Cart />
         </Wrap>
     )
 }

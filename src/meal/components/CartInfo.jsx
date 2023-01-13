@@ -1,12 +1,26 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { MyStore } from "../../store/myStore";
 
-const CartInfo = ({meal, setCartList}) => {
+const CartInfo = ({meal}) => {
+const { cartList, setCartList } = useContext(MyStore)
+// console.log('cartList: ', cartList);
 
 const [cartNum, setCartNum] = useState(1)
 const addCart = () => {
-    for (let i=0; i<cartNum; i++) {
-        setCartList(prev => [...prev, meal])
+    const ItemIndex = cartList.findIndex((v)=>v.id === meal.id)
+    if(ItemIndex === -1) {
+        const addItem = {
+            id: meal.id,
+            name: meal.name,
+            count: cartNum,
+            price: meal.price
+        }
+        setCartList(prev => [...prev, addItem])
+    } else {
+        let copy = [...cartList];
+        copy[ItemIndex].count += cartNum;
+        setCartList(copy);
     }
 }
 
@@ -17,7 +31,8 @@ const addCart = () => {
                 <AmountInput 
                 type="number"
                 value={cartNum}
-                onChange={(e)=>{setCartNum(e.target.value)}}
+                min={1}
+                onChange={(e)=>{setCartNum(+e.target.value)}} // + 붙여서 문자로 안바뀌게 조정
                 />
             </div>
             
@@ -61,4 +76,4 @@ justify-content: center;
 align-items: center;
 `
 
-export default CartInfo;
+export default React.memo(CartInfo);

@@ -1,12 +1,25 @@
+import { useContext, useEffect, useMemo } from "react";
 import styled from "styled-components";
+import { MyStore } from "../../store/myStore";
 
-const Cart = ({setCartModal}) => {
+const Cart = () => {
+
+const {setCartModal, cartList} = useContext(MyStore)
+
+const countCartItem = () => {
+    let total = 0;
+    cartList?.map((v)=> total += v.count)
+    return total;
+}
+
+const totalItem = countCartItem();
+
     return(
         <Container onClick={()=>{setCartModal(true)}}>
             <CartImg />
             <Title>Your Cart</Title>
             <CountBox>
-                <Count>3</Count>
+                <Count>{totalItem}</Count>
             </CountBox>
         </Container>
     )

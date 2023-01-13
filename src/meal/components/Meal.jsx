@@ -2,11 +2,11 @@ import styled from "styled-components";
 import CartInfo from "./CartInfo";
 import MealInfo from "./MealInfo";
 
-const Meal = ({meal, setCartList}) => {
+const Meal = ({meal}) => {
     return(
         <MealItem>
             <MealInfo meal={meal}/>
-            <CartInfo meal={meal} setCartList={setCartList}/>
+            <CartInfo meal={meal} />
         </MealItem>
     )
 }

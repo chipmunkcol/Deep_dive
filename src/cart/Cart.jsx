@@ -1,11 +1,23 @@
+import { useContext, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { MyStore } from "../store/myStore";
 import CartItem from "./CartItem";
 
-const Cart = ({cartList, setCartModal}) => {
+const Cart = () => {
+
+const { cartList, setCartModal } = useContext(MyStore)
 
 const ModalClose = () => {
     setCartModal(false)
 }
+
+const calculateTotal = () => {
+    let total = 0;
+    cartList?.map((v)=> total += v.price * v.count)
+    return total
+}
+
+const totalAmount = calculateTotal();
 
     return(
         <Wrap onClick={ModalClose}>
@@ -18,7 +30,7 @@ const ModalClose = () => {
                 )}
                 <TotalAmount>
                     <Amount>Total Amount</Amount>
-                    <Price>$88.99</Price>
+                    <Price>${totalAmount.toFixed(2)}</Price>
                 </TotalAmount>
             </Modal>
         </Wrap>
