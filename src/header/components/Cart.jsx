@@ -5,11 +5,12 @@ import { MyStore } from "../../store/myStore";
 const Cart = () => {
 
 const {setCartModal, cartList} = useContext(MyStore)
+console.log('cartList: ', cartList);
 
-const countCartItem = () => {
+const countCartItem = () => {   // 전체 아이템이 몇개인지 세는 함수
     let total = 0;
     cartList?.map((v)=> total += v.count)
-    return total;
+    return total;   //숫자 return 해서 totalItem 변수에 넣음
 }
 
 const totalItem = countCartItem();
@@ -17,11 +18,13 @@ const totalItem = countCartItem();
 const [animation, setAnimation] = useState(false)
 
 useEffect(()=>{
+if(cartList.length !== 0) {
     setAnimation(true);
-    
+
     setTimeout(() => {
         setAnimation(false)
     }, 300);
+}
 },[cartList])
 
     return(
@@ -51,9 +54,7 @@ const sizeMove = keyframes`
     100% {
         transform: scale(1);
     }
-
 `
-
 const Container = styled.div`
 width: 14rem;
 height: 4rem;
