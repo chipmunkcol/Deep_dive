@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { MyStore } from "../../store/myStore";
+import 카트이미지 from "../../asset/카트이미지.png"
 
 const Cart = () => {
 
@@ -32,7 +33,7 @@ if(cartList.length !== 0) {
         animation={animation} 
         onClick={()=>{setCartModal(true);}}
         >
-            <CartImg />
+            <CartImg 카트이미지={카트이미지}/>
             <Title>Your Cart</Title>
             <CountBox>
                 <Count>{totalItem}</Count>
@@ -74,12 +75,12 @@ animation: ${props => props.animation ? sizeMove : null} 0.3s;
 }
 `
 const CartImg = styled.div`
-/* background-image: url();
+background-image: url(${props => props.카트이미지});
 background-position: center;
-background-size: cover; */
+background-size: cover;
 width: 1rem;
 height: 1rem;
-background-color: teal;
+/* background-color: teal; */
 @media (max-width: 768px) {
     /* width:; */
 }

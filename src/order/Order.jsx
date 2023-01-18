@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import styled from 'styled-components';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from '../firebase/firebase';
 import Login from '../login/Login';
+import { MyStore } from '../store/myStore';
 
 const Order = () => {
 
+const {user, setUser} = useContext(MyStore)
 const [orderClick, setOrderClick] = useState(false)
 const [address, setAddress] = useState("")
 const [tel, setTel] = useState("")
 const [orderLoad, setOrderLoad] = useState(false)
-const [userLogin, setUserLogin] = useState(null)
 const [LoginModal, setLoginModal] = useState(false)
 
 // react 주소 가져오기 api 라이브러리
@@ -52,24 +53,22 @@ const onSubmit = (e) => {
 
 
 const orderOpen = () => {
-    // if 유저가 가입해야
-    if(userLogin) {
+    if(user) {
     setOrderClick(true)
     } else {
         setLoginModal(true)
     }
-    // else 로그인 창 띄우자
 }
 
-useEffect(()=>{
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-    const uid = user.uid;
-    console.log('uid: ', uid);
-    setUserLogin(uid);
-    }
-});
-},[])
+// useEffect(()=>{
+// onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//     const uid = user.uid;
+//     // console.log('uid: ', uid);
+//     setUserLogin(uid);
+//     }
+// });
+// },[])
 
 
 const OrderLoading = () => {
@@ -86,7 +85,7 @@ const OrderLoading = () => {
         
         { orderClick &&
             <>
-            <h4>진짜 주문은 안돼요..ㅎㅎ 가볍게 입력해주세요😍</h4>
+            <p style={{color:'gray'}}>로그인 해주셔서 감사합니다{':)'} <br/> 진짜 주문은 안되니 가볍게 입력해주세요😍</p>
             <form onSubmit={onSubmit}>
             <div>
                 <Input
