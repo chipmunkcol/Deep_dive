@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import Order from "../order/Order";
 import { MyStore } from "../store/myStore";
 import CartItem from "./CartItem";
 
@@ -20,24 +21,33 @@ const calculateTotal = () => {
 const totalAmount = calculateTotal();
 
     return(
-        <Wrap onClick={ModalClose}>
-            <Modal onClick={(e)=>{e.stopPropagation()}}>
+        <Wrap >
+            <Modal>
+                <div style={{width:'100%', display:'flex', justifyContent:'flex-end'}}>
+                <CloseBtn onClick={ModalClose}>close</CloseBtn>
+                </div>
+
                 {cartList.map((Item) => 
                     <CartItem 
                     key={Math.random()}
                     Item={Item}
                     />
                 )}
+
                 <TotalAmount>
                     <Amount>Total Amount</Amount>
                     <Price>${totalAmount.toFixed(2)}</Price>
                 </TotalAmount>
+
+            {/* 주문 input */}
+                {cartList.length !== 0 && <Order />}
+
             </Modal>
         </Wrap>
     )
 }
 
-const Wrap = styled.div`
+export const Wrap = styled.div`
 position: fixed;
 top: 0;
 left: 0;
@@ -47,7 +57,7 @@ z-index: 20;
 background-color: rgba(0, 0, 0, 0.75);
 `
 
-const slide = keyframes`
+export const slide = keyframes`
     from {
       opacity: 0;
       transform: translateY(-3rem);
@@ -57,7 +67,7 @@ const slide = keyframes`
       transform: translateY(0);
     }
 `
-const Modal = styled.div`
+export const Modal = styled.div`
 position: fixed;
 top: 20vh;
 left: 0;
@@ -72,12 +82,25 @@ box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 z-index: 30;
 animation: ${slide} 300ms ease-out forwards;
 `
+const CloseBtn = styled.div`
+width: 76px;
+height: 32px;
+background-color: #8a2b06;
+color: white;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+padding-top: 3px;
+font-size: 20px;
+cursor: pointer;
+`
 const TotalAmount = styled.div`
 display: flex;
 justify-content: space-between;
 color: orange;
+margin-top: 12px;
 @media (max-width:768px){
-    margin-top: 7px;
+    margin-top: 39px;
 }
 `
 const Amount = styled.div`
@@ -88,7 +111,6 @@ font-weight: 700;
 }
 `
 const Price = styled(Amount)`
-
 `
 
 

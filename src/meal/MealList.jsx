@@ -1,13 +1,32 @@
+import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { DUMMY_MEALS } from "../api/api";
-import Meal from "./components/Meal";
+import Meal from "./components/Meal"
 
 const MealList = () => {
+
+const [MealArr, setMealArr] = useState([])
+console.log('MealArr: ', MealArr);
+
+// firebase realtime datebase에서 가져오기
+const GetMeal = async() => {
+    const res = await fetch('https://auth-c1322-default-rtdb.firebaseio.com/meal.json')
+    const res2 = await res.json()
+    console.log(res2)
+    
+    for (const key in res2) { // 요 문법은꼭외워두자
+      const updatedMeal = {...res2[key], id: key}
+      setMealArr(prev => [...prev, updatedMeal])
+    }
+} 
+
+useEffect(()=>{
+    GetMeal()
+},[])
 
     return(
         <Wrap>
             <Container>
-                {DUMMY_MEALS.map((meal) => 
+                {MealArr?.map((meal) => 
                 <Meal
                 key={meal.id} 
                 meal={meal}
