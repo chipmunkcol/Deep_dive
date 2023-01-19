@@ -7,6 +7,8 @@ import MealList from "./meal/MealList";
 import User from "./user/User"
 import { MyStore } from "./store/myStore";
 import OrderHistory from "./order/OrderHistory";
+import { auth } from "./firebase/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 
 function App() {
@@ -17,6 +19,21 @@ const [cartList, setCartList] = useState([])
 const [user, setUser] = useState(null)
 // console.log('user: ', user);
 const [OrderHistoryModal, setOrderHistoryModal] = useState(false)
+
+useEffect(()=>{
+  onAuthStateChanged(auth, (user) => {
+      if(user) {
+          console.log(user);
+          
+          setUser({
+            userEmail: user.email, 
+            userPhoto: user.photoURL, 
+            userId: user.uid
+          })
+      }
+  })
+},[])
+
 
   return (
     <>

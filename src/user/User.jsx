@@ -63,7 +63,7 @@ background-size: cover;
 border-radius: 25px;
 position: fixed;
 z-index: 999999;
-right: 19%;
+right: 12%;
 bottom: 10%;
 cursor: pointer;
 `

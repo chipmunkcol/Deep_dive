@@ -9,7 +9,7 @@ import { MyStore } from '../store/myStore';
 
 const Order = () => {
 
-const {user, cartList} = useContext(MyStore)
+const {user, cartList, setCartList} = useContext(MyStore)
 const [orderClick, setOrderClick] = useState(false)
 const [address, setAddress] = useState("")
 const [tel, setTel] = useState("")
@@ -39,22 +39,31 @@ const openPostcode = () => {
 }
 
 // form 제출
-const onSubmit = (e) => {
+const onSubmit = async(e) => {
     e.preventDefault();
     const order = {
         order: cartList,
         address,
         tel,
-        createdDate: Date()
+        createdDate: Date(),
+        uid: user.uid
     }
     console.log(order)
-    // FB 저장 (firebase에서 export)
-    postFB(order)
     //그냥 보여주기식 로딩ㅎㅎ
     setOrderLoad(true)
-    setTimeout(() => {
-        setOrderLoad(false)
-    }, 1000);
+
+    // FB 저장 (firebase에서 export)
+    const res = await postFB(order) // boolean으로 결과 return해줬음
+    if (res) {
+        setTimeout(() => {
+            setCartList([])
+            setOrderLoad(false) 
+            setOrderClick(false)
+        }, 1000);
+    } else {
+        alert('새로고침 후 다시 시도해주세요!ㅠㅠ')
+    }
+    
 }
 
 

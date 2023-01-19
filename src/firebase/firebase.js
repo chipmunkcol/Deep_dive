@@ -17,13 +17,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const DB = getFirestore(app);
 
+const DB = getFirestore()
 export const postFB = async(order) => {
 try {
     const docRef = await addDoc(collection(DB, "order"), order);
     console.log("저장완료 id챙겨~", docRef.id);
+    return true;
   } catch (e) {
     console.error("실패!", e);
+    return false;
   }
 }

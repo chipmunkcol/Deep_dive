@@ -15,13 +15,9 @@ const onClickGithub = () => {
 signInWithPopup(auth, provider)
 .then((result) => {
     const user = result.user;
+    console.log('user: ', user);
     alert('로그인 되었습니다✨')
     setLoginModal(false)
-    setUser({
-        userEmail: user.email, 
-        userPhoto: user.photoURL, 
-        userId: user.uid
-    })
 }).catch((error) => {
     const errorMessage = error.message;
     const credential = GithubAuthProvider.credentialFromError(error);

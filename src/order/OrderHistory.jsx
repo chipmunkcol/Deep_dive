@@ -1,43 +1,49 @@
 import styled from "styled-components"
 import { DB } from "../firebase/firebase";
 import { useEffect, useState } from "react";
-import { onSnapshot, query, orderBy, collection } from "firebase/firestore"
+import { onSnapshot, query, orderBy, collection, getFirestore } from "firebase/firestore"
+import OrderHistoryBox from "./OrderHistoryBox";
 
-const OrderHistory = ({setOrderHistoryModal}) => {
-    
-const closeModal = () => {
-    setOrderHistoryModal(false)
-}
+const OrderHistory = ({ setOrderHistoryModal }) => {
 
-const [orderArr, setOrderArr] = useState([])
-console.log('orderArr: ', orderArr);
+    const closeModal = () => {
+        setOrderHistoryModal(false)
+    }
 
-//firebase firestore 가져오기
-const fnOnsnapshot = () => {
-    const q = query(collection(DB, "bucket"), orderBy("createdDate"))
+    const [orderArr, setOrderArr] = useState([])
+    console.log('orderArr: ', orderArr);
 
-    onSnapshot(q, (state) => {
-        setOrderArr([])   // 이상하게 함수 호출이 두번씩돼서 dbdata를 초기화 시켜줬는데 디버깅 해봐도 원인을 정확히 모르겠다.. 한참 고민했는데 흠.. 뭐 덕분에 디버거 쓰는 법 정도는 익힌듯 
-        state.docs.map((v) => { 
-        const updateData = {...v.data(), id: v.id}
-        setOrderArr(prev => [...prev, updateData])
+    //firebase firestore 가져오기
+    const DB = getFirestore()
+    const fnOnsnapshot = () => {
+        const q = query(collection(DB, "order"), orderBy("createdDate"))
+
+        onSnapshot(q, (state) => {
+            setOrderArr([])   // 이상하게 함수 호출이 두번씩돼서 dbdata를 초기화 시켜줬는데 디버깅 해봐도 원인을 정확히 모르겠다.. 한참 고민했는데 흠.. 뭐 덕분에 디버거 쓰는 법 정도는 익힌듯 
+            state.docs.map((v) => {
+                const updateData = { ...v.data(), id: v.id }
+                console.log('updateData: ', updateData);
+                setOrderArr(prev => [...prev, updateData])
+            })
         })
-    })
-}
-useEffect(()=>{
-    fnOnsnapshot();
-},[])
+    }
+    useEffect(() => {
+        fnOnsnapshot();
+    }, [])
 
-    
-    return( 
+
+    return (
         <Wrap onClick={closeModal}>
-            <Modal onClick={(e)=>{e.stopPropagation()}}>
-             야호
+            <Modal onClick={(e) => { e.stopPropagation() }}>
+                {orderArr?.map((order) =>
+                    <OrderHistoryBox 
+                    key={order.id}
+                    order={order} />)}
             </Modal>
         </Wrap>
-        
+
     )
-} 
+}
 
 const Wrap = styled.div`
 position: fixed;
