@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import styled from 'styled-components';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth, postFB } from '../firebase/firebase';
+import { postFB } from '../firebase/firebase';
 import Login from '../login/Login';
 import { MyStore } from '../store/myStore';
 
-const Order = () => {
+const Order = ({orderClick, setOrderClick}) => {
 
 const {user, cartList, setCartList} = useContext(MyStore)
-const [orderClick, setOrderClick] = useState(false)
 const [address, setAddress] = useState("")
 const [tel, setTel] = useState("")
-const [orderLoad, setOrderLoad] = useState(false)
 const [LoginModal, setLoginModal] = useState(false)
+const [orderLoad, setOrderLoad] = useState(false)
 
 // react 주소 가져오기 api 라이브러리
 const open = useDaumPostcodePopup(postcodeScriptUrl)
@@ -40,7 +38,7 @@ const openPostcode = () => {
 
 // form 제출
 const onSubmit = async(e) => {
-    e.preventDefault();
+    e.preventDefault({passive:false});
     const order = {
         order: cartList,
         address,
@@ -62,6 +60,7 @@ const onSubmit = async(e) => {
         }, 1000);
     } else {
         alert('새로고침 후 다시 시도해주세요!ㅠㅠ')
+        setOrderLoad(false) 
     }
     
 }
@@ -89,7 +88,7 @@ const OrderLoading = () => {
         
         { orderClick &&
             <>
-            <p style={{color:'gray'}}>로그인 해주셔서 감사합니다{':)'} <br/> 진짜 주문은 안되니 가볍게 입력해주세요😍</p>
+            <P style={{color:'gray'}}>로그인 해주셔서 감사합니다{':)'} <br/> 진짜 주문은 안되니 가볍게 입력해주세요😍</P>
             <form onSubmit={onSubmit}>
             <div>
                 <Input
@@ -124,17 +123,30 @@ const OrderLoading = () => {
         </>
     )
 }
-
+const P = styled.p`
+@media (max-width: 768px){
+    font-size: 12px;
+}
+`
 const Input = styled.input`
 width: 60%;
 height: 20px;
 margin-top: 10px;
+@media (max-width: 768px){
+width: 92%;
+margin-left: 5px;
+}
 `
 
 const Button = styled.button`
 width: 116px;
 height: 25px;
 margin-left: 5px;
+
+@media (max-width: 768px){
+margin-top: 1px;
+}
+
 `
 const OrderBtn = styled.button`
 width: 76px;

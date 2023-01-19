@@ -28,13 +28,19 @@ const Logout = () => {
     })
 }
 
-
 const openOrderHistoryModal = () => {
     setOrderHistoryModal(true)
 }
+
+// const mobilePreventDefault = (data) => {
+//     window.addEventListener(trackPos(data), function (event) { event.preventDefault (); }, {passive: false})
+// }
     return(
         <Draggable 
-        onDrag={(e, data) => {trackPos(data); e.preventDefault();}}>
+        onDrag={(e, data) => {
+            // mobilePreventDefault(data)
+            trackPos(data); e.preventDefault(); ;
+            }}>
         <ProfileImg
         profile={user.userPhoto}
         onClick={() => {
@@ -66,6 +72,9 @@ z-index: 999999;
 right: 12%;
 bottom: 10%;
 cursor: pointer;
+@media (max-width:768px){
+right: 21%;
+}
 `
 const ModalBox = styled.div`
 width: 72px;

@@ -28,7 +28,7 @@ useEffect(()=>{
           setUser({
             userEmail: user.email, 
             userPhoto: user.photoURL, 
-            userId: user.uid
+            uid: user.uid
           })
       }
   })

@@ -5,7 +5,7 @@ import { MyStore } from "../store/myStore";
 const CartItem = ({Item}) => {
     
 const { cartList, setCartList } = useContext(MyStore)
-console.log('cartList: ', cartList);
+// console.log('cartList: ', cartList);
 
 const index = cartList.findIndex((v) => v.id === Item.id)
 
@@ -51,6 +51,9 @@ height: 10vh;
 display: flex;
 justify-content: space-between;
 border-bottom: 3px solid #8a2b06;
+@media (max-width: 768px) {
+height: 8vh;
+}
 `
 const ItemBox = styled.div`
 `

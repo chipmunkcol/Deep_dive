@@ -7,6 +7,7 @@ import CartItem from "./CartItem";
 const Cart = () => {
 
 const { cartList, setCartModal } = useContext(MyStore)
+const [orderClick, setOrderClick] = useState(false)
 
 const ModalClose = () => {
     setCartModal(false)
@@ -22,7 +23,7 @@ const totalAmount = calculateTotal();
 
     return(
         <Wrap >
-            <Modal>
+            <Modal topPosition={orderClick}>
                 <div style={{width:'100%', display:'flex', justifyContent:'flex-end'}}>
                 <CloseBtn onClick={ModalClose}>close</CloseBtn>
                 </div>
@@ -40,7 +41,8 @@ const totalAmount = calculateTotal();
                 </TotalAmount>
 
             {/* 주문 input */}
-                {cartList.length !== 0 && <Order />}
+                {cartList.length !== 0 && 
+                    <Order orderClick={orderClick} setOrderClick={setOrderClick}/>}
 
             </Modal>
         </Wrap>
@@ -69,7 +71,7 @@ export const slide = keyframes`
 `
 export const Modal = styled.div`
 position: fixed;
-top: 20vh;
+top: ${props=> props.topPosition ? "10vh" : "20vh"}; // order클릭하면 조금 올리자
 left: 0;
 right: 0;
 margin: 0 auto;
@@ -100,7 +102,7 @@ justify-content: space-between;
 color: orange;
 margin-top: 12px;
 @media (max-width:768px){
-    margin-top: 39px;
+    margin-top: 16px;
 }
 `
 const Amount = styled.div`
