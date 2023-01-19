@@ -78,8 +78,8 @@ const CartImg = styled.div`
 background-image: url(${props => props.카트이미지});
 background-position: center;
 background-size: cover;
-width: 1rem;
-height: 1rem;
+width: 2rem;
+height: 2rem;
 /* background-color: teal; */
 @media (max-width: 768px) {
     /* width:; */

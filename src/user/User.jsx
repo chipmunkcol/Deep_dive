@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { auth } from '../firebase/firebase';
 import { MyStore } from '../store/myStore';
 
-const User = () => {
+const User = ({OrderHistoryModal, setOrderHistoryModal}) => {
 
+// drabble 로 유저내역 가져가자
 const { user, setUser } = useContext(MyStore)
 const [position, setPosition] = useState({ x: 0, y: 0 }); // box의 포지션 값
 const [checkMove, setCheckMove] = useState({x: 0, y: 0});
-const [LogoutModal, setLogoutModal] = useState(false)
+const [LogoutOrderHistoryModal, setLogoutOrderHistoryModal] = useState(false)
 
 const trackPos = (data) => {
     setPosition({ x: data.x, y: data.y });
@@ -22,8 +23,14 @@ const trackPos = (data) => {
 
 const Logout = () => {
     signOut(auth).then(() => {
+        alert('로그아웃 되었습니다🙌')
         setUser(null)
     })
+}
+
+
+const openOrderHistoryModal = () => {
+    setOrderHistoryModal(true)
 }
     return(
         <Draggable 
@@ -32,13 +39,16 @@ const Logout = () => {
         profile={user.userPhoto}
         onClick={() => {
             if(position.x === checkMove.x) {
-                setLogoutModal(prev => !prev)
+                setLogoutOrderHistoryModal(prev => !prev)
             }
         }}
         >
-        {LogoutModal && 
-            <LogoutBox onClick={Logout}>Logout</LogoutBox>}
-            
+        {LogoutOrderHistoryModal && 
+        <ModalBox>
+            <OrderHistoryBox onClick={openOrderHistoryModal}>주문내역</OrderHistoryBox>
+            <LogoutBox onClick={Logout}>Logout</LogoutBox>
+        </ModalBox>
+        }
         </ProfileImg>
     </Draggable>
     )
@@ -57,14 +67,23 @@ right: 19%;
 bottom: 10%;
 cursor: pointer;
 `
-
-const LogoutBox = styled.div`
-width: 64px;
-height: 26px;
+const ModalBox = styled.div`
+width: 72px;
+margin: 0px 0 0 -10px;
+border-radius: 8px;
 background-color: #8a2b06;
-border-radius: 10px;
-margin: 54px 0px 0 -6px;
+`
+const OrderHistoryBox = styled.div`
+width: 65px;
+height: 26px;
+border-bottom: 1px solid white;
+margin: 59px 0px 0 3px;
 text-align: center;
 `
+const LogoutBox = styled(OrderHistoryBox)`
+margin-top: 0px;
+border-bottom: none;
+`
+
 
 export default User;

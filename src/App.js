@@ -6,6 +6,7 @@ import Header from "./header/Header";
 import MealList from "./meal/MealList";
 import User from "./user/User"
 import { MyStore } from "./store/myStore";
+import OrderHistory from "./order/OrderHistory";
 
 
 function App() {
@@ -14,7 +15,8 @@ const [cartModal, setCartModal] = useState(false)
 const [cartList, setCartList] = useState([])
 // console.log('cartList: ', cartList);
 const [user, setUser] = useState(null)
-console.log('user: ', user);
+// console.log('user: ', user);
+const [OrderHistoryModal, setOrderHistoryModal] = useState(false)
 
   return (
     <>
@@ -24,7 +26,8 @@ console.log('user: ', user);
       <Introdesc />
       <MealList/>
       {cartModal && <Cart /> }
-      {user && <User />}
+      {user && <User OrderHistoryModal={OrderHistoryModal} setOrderHistoryModal={setOrderHistoryModal}/>}
+      {OrderHistoryModal && <OrderHistory setOrderHistoryModal={setOrderHistoryModal}/>} 
     </MyStore.Provider>
     </>
   );

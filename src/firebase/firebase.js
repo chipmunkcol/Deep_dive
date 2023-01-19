@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, addDoc, query, orderBy } from 'firebase/firestore/lite';
+
 import { getAuth } from "firebase/auth";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyBlmyA6ZK4aJ44O6lC010M5c17JWpiUAMA",
@@ -15,4 +17,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const DB = getFirestore(app);
 
+export const postFB = async(order) => {
+try {
+    const docRef = await addDoc(collection(DB, "order"), order);
+    console.log("저장완료 id챙겨~", docRef.id);
+  } catch (e) {
+    console.error("실패!", e);
+  }
+}

@@ -3,13 +3,13 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import styled from 'styled-components';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from '../firebase/firebase';
+import { auth, postFB } from '../firebase/firebase';
 import Login from '../login/Login';
 import { MyStore } from '../store/myStore';
 
 const Order = () => {
 
-const {user, setUser} = useContext(MyStore)
+const {user, cartList} = useContext(MyStore)
 const [orderClick, setOrderClick] = useState(false)
 const [address, setAddress] = useState("")
 const [tel, setTel] = useState("")
@@ -38,13 +38,19 @@ const openPostcode = () => {
     open({ onComplete: handleComplete })
 }
 
+// form 제출
 const onSubmit = (e) => {
     e.preventDefault();
     const order = {
+        order: cartList,
         address,
-        tel
+        tel,
+        createdDate: Date()
     }
     console.log(order)
+    // FB 저장 (firebase에서 export)
+    postFB(order)
+    //그냥 보여주기식 로딩ㅎㅎ
     setOrderLoad(true)
     setTimeout(() => {
         setOrderLoad(false)
@@ -59,17 +65,6 @@ const orderOpen = () => {
         setLoginModal(true)
     }
 }
-
-// useEffect(()=>{
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//     const uid = user.uid;
-//     // console.log('uid: ', uid);
-//     setUserLogin(uid);
-//     }
-// });
-// },[])
-
 
 const OrderLoading = () => {
     return <h2 style={{color:'black'}}>결제 중 입니다~.~</h2>
