@@ -82,10 +82,16 @@ width: 2rem;
 height: 2rem;
 /* background-color: teal; */
 @media (max-width: 768px) {
-    /* width:; */
+width: 1.5rem;
+height: 1.5rem;
+margin: 0 -4px 0 3px;
 }
 `
 const Title = styled.div`
+font-size: 20px;
+@media (max-width:768px) {
+font-size: 15px;
+}
 `
 const CountBox = styled.div`
 width: 37px;

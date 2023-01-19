@@ -13,12 +13,25 @@ const [position, setPosition] = useState({ x: 0, y: 0 }); // box의 포지션 �
 const [checkMove, setCheckMove] = useState({x: 0, y: 0});
 const [LogoutOrderHistoryModal, setLogoutOrderHistoryModal] = useState(false)
 
-const trackPos = (data) => {
-    setPosition({ x: data.x, y: data.y });
+const [drag, setDrag] = useState(false)
+console.log('drag: ', drag);
+const handleDragStart = () => {
+    setDrag(false)
+} 
+const handleDragStop = () => {
+    setDrag(true)
+} 
 
-    setTimeout(() => {
-    setCheckMove({x: data.x, y: data.y})
-    }, 500);
+
+const trackPos = (event, data) => {
+    event.stopPropagation();
+    event.preventDefault();
+    // setDrag(false)
+    // setPosition({ x: data.x, y: data.y });
+
+    // setTimeout(() => {
+    // setCheckMove({x: data.x, y: data.y})
+    // }, 300);
 }
 
 const Logout = () => {
@@ -32,21 +45,28 @@ const openOrderHistoryModal = () => {
     setOrderHistoryModal(true)
 }
 
-// const mobilePreventDefault = (data) => {
-//     window.addEventListener(trackPos(data), function (event) { event.preventDefault (); }, {passive: false})
-// }
     return(
         <Draggable 
-        onDrag={(e, data) => {
-            // mobilePreventDefault(data)
-            trackPos(data); e.preventDefault(); ;
-            }}>
+        // disabled={drag}
+        // onDrag={(e, data) => {
+        //     // mobilePreventDefault(data)
+        //     trackPos(data); 
+        //     // e.stopPropagation()
+        //     e.preventDefault();
+        //     }}
+        // onMouseDown={handleDragStart}
+        // onStop={handleDragStop}
+        onStart={trackPos}
+        onDrag={trackPos}
+        onStop={trackPos}
+        >
         <ProfileImg
         profile={user.userPhoto}
-        onClick={() => {
-            if(position.x === checkMove.x) {
+        onClick={(e) => {
+            e.preventDefault()
+            // if(position.x === checkMove.x) {
                 setLogoutOrderHistoryModal(prev => !prev)
-            }
+            // }
         }}
         >
         {LogoutOrderHistoryModal && 

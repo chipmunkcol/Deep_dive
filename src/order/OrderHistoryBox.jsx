@@ -2,10 +2,10 @@ import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MyStore } from "../store/myStore";
 
-const Order = ({v}) => {
+const Order = ({item}) => {
     return(
         <>
-        <div>{v.name} x{v.count}개</div>
+        <div>{item.name} x{item.count}개</div>
         </>
     )
 }
@@ -43,7 +43,11 @@ const updatedDate = FNdate();
             <Tel>[Tel] {order.tel}</Tel>
             <Address>{order.address}</Address>
             <OrderItem>
-                {orderItem.map((v) => <Order v={v}/>)}
+                {orderItem.map((item) => 
+                    <Order 
+                    key={item.id + item.name}
+                    item={item}
+                    />)}
             </OrderItem>
             <TotalAmount>${totalAmount.toFixed(2)}</TotalAmount>
         </Container>}
