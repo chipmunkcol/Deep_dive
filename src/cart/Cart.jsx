@@ -71,7 +71,7 @@ export const slide = keyframes`
 `
 export const Modal = styled.div`
 position: fixed;
-top: ${props=> props.topPosition ? "10vh" : "20vh"}; // order클릭하면 조금 올리자
+top: ${props => props.topPosition ? "10vh" : "20vh"}; // order클릭하면 조금 올리자
 left: 0;
 right: 0;
 margin: 0 auto;
@@ -92,7 +92,8 @@ color: white;
 border-radius: 10px;
 display: flex;
 justify-content: center;
-padding-top: 3px;
+align-items: center;
+/* padding-top: 3px; */
 font-size: 20px;
 cursor: pointer;
 `

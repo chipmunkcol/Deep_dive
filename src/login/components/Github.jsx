@@ -47,6 +47,9 @@ justify-content: space-between;
 align-items: center;
 padding: 6px 20px 6px 20px;
 cursor: pointer;
+@media (max-width: 768px){
+    width: 86%;
+}
 `
 const GithubLogo = styled.div`
 width: 30px;

@@ -47,15 +47,19 @@ const deleteItem = () => {
 
 const Wrap = styled.div`
 width: 100%;
-height: 10vh;
+/* height: 10vh; */
 display: flex;
 justify-content: space-between;
 border-bottom: 3px solid #8a2b06;
 @media (max-width: 768px) {
-height: 8vh;
+/* height:  */
 }
 `
 const ItemBox = styled.div`
+margin: 5px 0px 15px 0px;
+@media (max-width: 768px) {
+margin: 0 0 9px 0px;
+}
 `
 
 const Title = styled.div`

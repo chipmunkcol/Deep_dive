@@ -73,7 +73,8 @@ right: 12%;
 bottom: 10%;
 cursor: pointer;
 @media (max-width:768px){
-right: 21%;
+right: 5%;
+top: 45%;
 }
 `
 const ModalBox = styled.div`
