@@ -36,7 +36,7 @@ signInWithPopup(auth, provider)
 }
 
 const GithubLoginBtn = styled.div`
-width: 86%;
+width: 83%;
 height: 42px;
 border-radius: 10px;
 background-color: black;
