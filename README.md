@@ -1,7 +1,7 @@
 🔧기술스택 (JavaScript/ ContextAPI/ Firebase/ Styled-Components)
 
 # Restaurant 배달 어플입니다 :)
-    [구경하기🙋‍♀️](https://auth-c1322.web.app/)
+ [구경하기🙋‍♀️](https://auth-c1322.web.app/)
 
 ## 🎮 주요기능
     - 음식 장바구니에 담기(contextAPI)
@@ -10,14 +10,14 @@
     - 주문하기 & 주문내역(firebase_DB_fireStore)
 
 ##  🎨 Styled
+    - 모바일 대응(@media)
     - 카트 애니메이션(keyframes & useEffect)
-    - 메뉴 & 카트 애니메이션(keyframes)
     - 로그인사용자 메뉴(react-draggable)
 
 ## 🦖 트러블슈팅
     
 
-# React Deep_dive
+# React Deep_Dive(udemy t.Max)
 
     - why react? 자바스크립트 라이브러리로 UI를 더 쉽게 구현
     - why component? 재사용성(중복 감소) / 분리(오류 감소) 작고 관리 가능한 단위로 유지
