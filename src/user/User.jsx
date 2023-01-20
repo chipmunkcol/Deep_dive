@@ -15,58 +15,48 @@ const [LogoutOrderHistoryModal, setLogoutOrderHistoryModal] = useState(false)
 
 const [drag, setDrag] = useState(false)
 console.log('drag: ', drag);
-const handleDragStart = () => {
-    setDrag(false)
-} 
+
 const handleDragStop = () => {
     setDrag(true)
 } 
 
-
 const trackPos = (event, data) => {
     event.stopPropagation();
-    event.preventDefault();
-    // setDrag(false)
-    // setPosition({ x: data.x, y: data.y });
+    // event.preventDefault();
+    setPosition({ x: data.x, y: data.y });
 
-    // setTimeout(() => {
-    // setCheckMove({x: data.x, y: data.y})
-    // }, 300);
+    setTimeout(() => {
+    setCheckMove({x: data.x, y: data.y})
+    }, 300);
 }
 
-const Logout = () => {
+const Logout = (e) => {
+    e.stopPropagation();
     signOut(auth).then(() => {
         alert('로그아웃 되었습니다🙌')
         setUser(null)
     })
 }
 
-const openOrderHistoryModal = () => {
+const openOrderHistoryModal = (e) => {
+    e.stopPropagation();
     setOrderHistoryModal(true)
 }
 
     return(
         <Draggable 
-        // disabled={drag}
-        // onDrag={(e, data) => {
-        //     // mobilePreventDefault(data)
-        //     trackPos(data); 
-        //     // e.stopPropagation()
-        //     e.preventDefault();
-        //     }}
-        // onMouseDown={handleDragStart}
-        // onStop={handleDragStop}
-        onStart={trackPos}
+        disabled={drag}
         onDrag={trackPos}
-        onStop={trackPos}
+        onStop={handleDragStop}
         >
         <ProfileImg
         profile={user.userPhoto}
+        drag={!drag}
         onClick={(e) => {
-            e.preventDefault()
-            // if(position.x === checkMove.x) {
-                setLogoutOrderHistoryModal(prev => !prev)
-            // }
+            if(position.x === checkMove.x) {
+                setLogoutOrderHistoryModal(prev => !prev) 
+                setDrag(prev => !prev)
+            }
         }}
         >
         {LogoutOrderHistoryModal && 
@@ -92,10 +82,12 @@ z-index: 999999;
 right: 12%;
 bottom: 10%;
 cursor: pointer;
+filter: ${props=>props.drag ? "drop-shadow(0 0 10px rgba(36, 255, 102, 0.7))" : "0"}; // draggable 된다는 표시 준건데 사실 근본적인 해결책은 아닌거 압니다 흙흙..
 @media (max-width:768px){
 right: 5%;
 top: 45%;
 }
+
 `
 const ModalBox = styled.div`
 width: 72px;
@@ -117,3 +109,12 @@ border-bottom: none;
 
 
 export default User;
+
+        // onDrag={(e, data) => {
+        //     // mobilePreventDefault(data)
+        //     trackPos(data); 
+        //     // e.stopPropagation()
+        //     e.preventDefault();
+        //     }}
+        // onMouseDown={handleDragStart}
+        // onStop={handleDragStop} //  draggable 개빡친다~~~ 커스텀 진짜 잘 안되네 다음엔 라이브러리 안쓰고 css로 해보자

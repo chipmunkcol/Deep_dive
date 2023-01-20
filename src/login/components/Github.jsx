@@ -7,8 +7,6 @@ import { MyStore } from "../../store/myStore";
 
 const Github = ({setLoginModal}) => {
 
-const { setUser } = useContext(MyStore)
-
 const provider = new GithubAuthProvider();
 
 const onClickGithub = () => {

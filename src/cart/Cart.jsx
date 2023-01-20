@@ -75,7 +75,9 @@ top: ${props => props.topPosition ? "10vh" : "20vh"}; // order클릭하면 조�
 left: 0;
 right: 0;
 margin: 0 auto;
-width: 50%;
+width: 28%;
+max-height: 80vh;
+overflow: auto;
 background-color: white;
 color: black;
 padding: 1rem;
@@ -83,6 +85,10 @@ border-radius: 14px;
 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 z-index: 30;
 animation: ${slide} 300ms ease-out forwards;
+@media(max-width: 768px){ 
+    top: 3vh;
+    width: 63%;
+}
 `
 const CloseBtn = styled.div`
 width: 76px;
