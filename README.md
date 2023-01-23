@@ -1,5 +1,5 @@
-🔧기술스택 
-FE(JavaScript/ ContextAPI/ Styled-Components/ Firebase(Hosting))
+🔧기술스택 <br/>
+FE(JavaScript/ ContextAPI/ Styled-Components/ Firebase(Hosting)) <br/>
 BE(Serverless_Firebase(Auth, FireStore))
 
 # Restaurant 배달 어플입니다 :)
