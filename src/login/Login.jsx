@@ -37,7 +37,7 @@ top: 10vh; // order클릭하면 조금 올리자
 left: 0;
 right: 0;
 margin: 0 auto;
-width: 56%;
+width: 273px;
 background-color: white;
 color: black;
 padding: 1rem;

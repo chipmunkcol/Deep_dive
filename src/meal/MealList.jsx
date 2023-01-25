@@ -13,7 +13,7 @@ const GetMeal = async() => {
     const res2 = await res.json()
     console.log(res2)
     
-    for (const key in res2) { // 와 이걸 해본적이 없구나.. 진짜 한참 고생했네, 요 문법은꼭외워두자ㅠ
+    for (const key in res2) { // 이 문법 까먹어서 진짜 한참 고생했네.. 요 문법은꼭외워두자ㅠ
       const updatedMeal = {...res2[key], id: key}
       setMealArr(prev => [...prev, updatedMeal])
     }

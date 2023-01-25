@@ -69,7 +69,7 @@ font-size: 18px;
 cursor: pointer;
 animation: ${props => props.animation ? sizeMove : null} 0.3s;
 @media (max-width: 768px) {
-    width: 10rem;
+    width: 4rem;
     height: 3rem;
     font-size: 14px;
 }
@@ -90,7 +90,7 @@ margin: 0 -4px 0 3px;
 const Title = styled.div`
 font-size: 20px;
 @media (max-width:768px) {
-font-size: 15px;
+display: none;
 }
 `
 const CountBox = styled.div`
@@ -101,6 +101,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 border-radius: 15px;
+@media (max-width:768px) {
+width: 28px;
+}
 `
 const Count = styled.div`
 `

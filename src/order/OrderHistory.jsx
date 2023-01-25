@@ -66,5 +66,8 @@ padding: 1rem;
 border-radius: 14px;
 box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
 z-index: 30;
+@media (max-width:768px) {
+    width: 63%;
+}
 `
 export default OrderHistory;
