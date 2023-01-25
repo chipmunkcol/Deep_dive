@@ -1,4 +1,6 @@
-🔧기술스택 (JavaScript/ ContextAPI/ Firebase/ Styled-Components)
+🔧기술스택 <br/>
+FE(JavaScript/ ContextAPI/ Styled-Components/ Firebase(Hosting)) <br/>
+BE(Serverless_Firebase(Auth, FireStore))
 
 # Restaurant 배달 어플입니다 :)
  [구경하기🙋‍♀️](https://auth-c1322.web.app/)
@@ -10,7 +12,7 @@
     - 주문하기 & 주문내역(firebase_DB_fireStore)
 
 ##  🎨 Styled
-    - 모바일 대응(@media)
+    - 햄버거 메뉴바 등 반응형 웹(@media)
     - 카트 애니메이션(keyframes & useEffect)
     - 로그인사용자 메뉴(react-draggable)
 
