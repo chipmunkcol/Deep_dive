@@ -19,7 +19,7 @@ const OrderHistory = ({ setOrderHistoryModal }) => {
         const q = query(collection(DB, "order"), orderBy("createdDate"))
 
         onSnapshot(q, (state) => {
-            setOrderArr([])   // 이상하게 함수 호출이 두번씩돼서 dbdata를 초기화 시켜줬는데 디버깅 해봐도 원인을 정확히 모르겠다.. 한참 고민했는데 흠.. 뭐 덕분에 디버거 쓰는 법 정도는 익힌듯 
+            setOrderArr([])   // 이상하게 함수 호출이 두번씩돼서 orderArr를 초기화 시켜줬는데 디버깅 해봐도 원인을 정확히 모르겠다.. 한참 고민했는데 흠.. 뭐 덕분에 디버거 쓰는 법 정도는 익힌듯 
             state.docs.map((v) => {
                 const updateData = { ...v.data(), id: v.id }
                 setOrderArr(prev => [...prev, updateData])

@@ -38,3 +38,5 @@ BE(Serverless_Firebase(Auth, FireStore))
       const updatedMeal = {...res2[key], id: key}
       setMealArr(prev => [...prev, updatedMeal])
     }
+    - why .env? git에 중요 api등을 올리기 싫을 때 사용/ 근데 git에만 안올라가고 배포할때는 같이 업로드되기때문에 추가 관리필요
+
