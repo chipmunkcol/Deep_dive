@@ -3,15 +3,20 @@ import { DB } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import { onSnapshot, query, orderBy, collection, getFirestore } from "firebase/firestore"
 import OrderHistoryBox from "./OrderHistoryBox";
+import { useContext } from "react";
+import { MyStore } from "../store/myStore";
 
 const OrderHistory = ({ setOrderHistoryModal }) => {
+
+    const { user } = useContext(MyStore)
+    console.log('user: ', user.uid);
 
     const closeModal = () => {
         setOrderHistoryModal(false)
     }
 
     const [orderArr, setOrderArr] = useState([])
-    // console.log('orderArr: ', orderArr);
+    console.log('orderArr: ', orderArr);
 
     //firebase firestore 가져오기
     const DB = getFirestore()
@@ -21,8 +26,10 @@ const OrderHistory = ({ setOrderHistoryModal }) => {
         onSnapshot(q, (state) => {
             setOrderArr([])   // 이상하게 함수 호출이 두번씩돼서 orderArr를 초기화 시켜줬는데 디버깅 해봐도 원인을 정확히 모르겠다.. 한참 고민했는데 흠.. 뭐 덕분에 디버거 쓰는 법 정도는 익힌듯 
             state.docs.map((v) => {
-                const updateData = { ...v.data(), id: v.id }
+                if(v.data().uid === user.uid) {
+                const updateData = { ...v.data(), id: v.id } // 주문한사람 Firebase id 붙여주자
                 setOrderArr(prev => [...prev, updateData])
+                }
             })
         })
     }
@@ -60,6 +67,9 @@ left: 0;
 right: 0;
 margin: 0 auto;
 width: 27%;
+max-height: 60%;
+overflow: auto;
+
 background-color: white;
 color: black;
 padding: 1rem;

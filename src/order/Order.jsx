@@ -53,6 +53,7 @@ const Order = ({ orderClick, setOrderClick }) => {
         const res = await postFB(order) // boolean으로 결과 return해줬음
         if (res) {
             setTimeout(() => {
+                alert("주문되었습니다! '주문내역'에서 보실 수 있어요💁‍♀️")
                 setCartList([])
                 setOrderClick(false)
                 setOrderLoad(false)
@@ -65,7 +66,7 @@ const Order = ({ orderClick, setOrderClick }) => {
     }
 
 
-    const orderOpen = () => {
+    const orderOpen = () => { // 로그인됐을때만 order 가능
         if (user) {
             setOrderClick(true)
         } else {
@@ -73,9 +74,9 @@ const Order = ({ orderClick, setOrderClick }) => {
         }
     }
 
-    const OrderLoading = () => {
-        return <h2 style={{ color: 'black' }}>결제 중 입니다~.~</h2>
-    }
+const OrderLoading = () => {  // 보여주기식 컴포넌트
+    return <h2 style={{ color: 'black' }}>결제 중 입니다~.~</h2>
+}
 
     return (
         <>

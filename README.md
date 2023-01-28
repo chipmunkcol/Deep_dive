@@ -32,7 +32,7 @@ BE(Serverless_Firebase(Auth, FireStore))
         - Blending client-side and server-side: Fetch data on the server and render finished pages
         3) 풀스택 프레임워크(Fullstack Capabilities)
         - Easily add backend (server-side) code to your Next / React apps
-        - Storing data, getting data, authentication etc. can be added to your React projects
+        - Storing data, getting data, authentication etc. can be added to your React projects 
         4) routing (File-based Routing)
         - Define pages and routes with files and folders instead of code
         - Less code, less work, highly understandable

@@ -14,7 +14,7 @@ const [checkMove, setCheckMove] = useState({x: 0, y: 0});
 const [LogoutOrderHistoryModal, setLogoutOrderHistoryModal] = useState(false)
 
 const [drag, setDrag] = useState(false)
-console.log('drag: ', drag);
+// console.log('drag: ', drag);
 
 const handleDragStop = () => {
     setDrag(true)

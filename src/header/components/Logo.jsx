@@ -11,24 +11,21 @@ const handleModalMenuBar = () => {
     setModalMenuBar(prev => !prev);
 }
 
-const [LoginModal, setLoginModal] = useState(false)
-const handleLoginModal = () => {
-    setLoginModal(true)
-}
+
 
     return (
         <>
-            <MobileBar menubar={menubar}
+            <MobileBar 
+                menubar={menubar} // 모바일 햄버거 메뉴바
                 onClick={handleModalMenuBar}
             />
             <MainLogo
-                onClick={handleLoginModal}
+                onClick={handleModalMenuBar}
             >
                 ReactMeals
             </MainLogo>
 
             {modalMenuBar && <MenuBar setModalMenuBar={setModalMenuBar}/>}
-            {LoginModal && <Login setLoginModal={setLoginModal}/>}
         </>
     )
 }
@@ -64,7 +61,7 @@ background-size: cover;
 width: 30px;
 height: 30px;
 @media (min-width: 780px) {
-    display: none;
+display: none;
 }
 `
 

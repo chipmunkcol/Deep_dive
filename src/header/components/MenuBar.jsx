@@ -6,11 +6,15 @@ import { MyStore } from "../../store/myStore";
 import Login from "../../login/Login";
 import OrderHistory from "../../order/OrderHistory"
 
-const MenuBar = () => {
+const MenuBar = ({ setModalMenuBar }) => {
 
     const { user, setUser} = useContext(MyStore);
     const [LoginModal, setLoginModal] = useState(false);
     const [OrderHistoryModal, setOrderHistoryModal] = useState(false)
+
+    const handleCloseModal = () => {
+        setModalMenuBar(false)
+    }
 
     const handleLogin = () => {
         setLoginModal(true)
@@ -27,8 +31,8 @@ const MenuBar = () => {
     }
 
     return (
-        <Wrap>
-            <Modal>
+        <Wrap onClick={handleCloseModal}>
+            <Modal onClick={(e)=>{e.stopPropagation()}}>
                 {user ?
                     (<>
                         <StyledOrderHistory
@@ -53,17 +57,20 @@ const MenuBar = () => {
 
 const Wrap = styled.div`
 position: fixed;
-top: 4rem;
+top: 5rem;
 left: 0;
 width: 100%;
 height: 100%;
 z-index: 20;
 background-color: rgba(0, 0, 0, 0.75);
+@media(max-width: 768px){
+    top: 4rem;
+}
 `
 
 const Modal = styled.div`
-position: fixed;
-top: 4rem;
+/* position: fixed;
+top: 4rem; */
 left: 0;
 right: 0;
 margin: 0 auto;
@@ -75,7 +82,7 @@ border-top: 1px solid gray;
 const StyledLogin = styled.div`
 font-size: 18px;
 border-bottom: 1px solid gray;
-padding: 8px;
+padding: 8px 8px 8px 10%;
 `
 const StyledOrderHistory = styled(StyledLogin)``
 const Logout = styled(StyledLogin)``
