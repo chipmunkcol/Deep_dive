@@ -60,6 +60,7 @@ background-position: center;
 background-size: cover;
 width: 30px;
 height: 30px;
+cursor: pointer;
 @media (min-width: 780px) {
 display: none;
 }

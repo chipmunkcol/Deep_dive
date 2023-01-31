@@ -78,6 +78,7 @@ width: 100%;
 background-color: #8a2b06;
 color: white;
 border-top: 1px solid gray;
+cursor: pointer;
 `
 const StyledLogin = styled.div`
 font-size: 18px;
