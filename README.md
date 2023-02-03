@@ -17,6 +17,37 @@ BE(Serverless_Firebase(Auth, FireStore))
     - 로그인사용자 메뉴(react-draggable)
 
 ## 🦖 트러블슈팅
+
+<details> 
+
+<summary>1.state </summary>
+
+    요 프로젝트는 state 관리에 공을 많이 들였다. 일부러 props 드릴링도 해보고 recoil로 관리도 해봤다가 생각해보니 로그인이랑 장바구니 state정도만 쓸건데 contextAPI 써도 될거같아서 context로 관리했다. docs엔 많이 안 변하는 state 관리할 때 쓰라고해서 좀 걱정했는데 저정도는 세이프였다.
+    그리고 생각보다 나를 괴롭혔던(?)건 장바구니에 item 추가하는거였는데 item 각 수량을 반복문으로 만든 item 컴포넌트 안에서 useState(0)에 넣고 관리하다보니까 장바구니에서 수량을 추가하거나 뺄 때 반복문 item의 useState(0)들이 모두 랜더링돼서 빠르게 추가하거나 빼면 버그가 발생했다. useState(0)를 item 반복문 밖으로 빼서 수량이 변경된 item만 랜더링 시켜줘서 문제를 해결했는데 요거 디버깅 과정에서 랜더링을 차분히 관찰해 볼수 있었다. (react devtools로 components와 profiler의 컴포넌트 랜더링 highlight 관찰하면서 디버깅했는데 뭐 하다가 중간에 console도 찍긴 했지만..ㅎ 디버깅 연습정도는 해볼수있었다 디버깅 많이 해보자 :) )
+    
+</details>
+
+<details>
+
+<summary>2.DataBase(DB)</summary>
+
+    전에 몽고디비 써보긴했는데 진짜 병아리때 써봐서 느낌이 잘 안왔는데(지금도 병아리긴함), 백엔드랑 API 설계하고 AJAX 통신했을때랑 또 다른 맛이었다. 데이터베이스 설계라던지 안해봐서 처음엔 부담이 좀 있었는데 Firebase는 애초에 NoSQL이라(스키마가없어서) 시작하기도 좋고 특히 실시간 동기화가 너무 좋았음!
+    데이터베이스가 값이 변하면 알려주는 기능이있어서 내장된 코드 onSnapshot & onAuthStateChanged 써서 실시간 주문한 내역 가지고오고 로그인 내역 가지고오는 등 
+    그만큼 코드 신경을 덜 쓸수있었고 사용법도 굉장히 간편했다.  
+
+    푸쉬알람기능도 있어서 전에 알람기능 구현하려고 sse썼는데 다음엔 이거 써봐야징 
+
+</details>
+
+<details>
+
+<summary>3.css</summary>
+
+    레이아웃 구성하는거 좀 자신감이 붙었다🐱‍🏍 css 하다보면 좀 시간 아깝고 그랬는데 익숙해지기도했고 animation 뭐 넣을지 고민하는게 생각보다 쏠쏠하다.
+    반응형 웹 안해봐서 어려운건줄 알았는데 생각보다 싱거웠다. 다음엔 sass 써봐야징
+
+</details>
+    
     
 
 # React Deep_Dive(udemy t.Max)

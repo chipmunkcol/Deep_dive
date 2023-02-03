@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { DB } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import { onSnapshot, query, orderBy, collection, getFirestore } from "firebase/firestore"
 import OrderHistoryBox from "./OrderHistoryBox";
@@ -19,8 +18,9 @@ const OrderHistory = ({ setOrderHistoryModal }) => {
     console.log('orderArr: ', orderArr);
 
     //firebase firestore 가져오기
-    const DB = getFirestore()
     const fnOnsnapshot = () => {
+        
+        const DB = getFirestore()
         const q = query(collection(DB, "order"), orderBy("createdDate"))
 
         onSnapshot(q, (state) => {
