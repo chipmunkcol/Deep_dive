@@ -3,7 +3,6 @@ FE (JavaScript/ ContextAPI/ Styled-Components/ Firebase(Hosting) ) <br/>
 BE (Serverless_Firebase(Auth, DB) )
 
 # Restaurant 배달 어플입니다 :)
- [구경하기🙋‍♀️](https://auth-c1322.web.app/)
 
 ## 🎮 주요기능
     - 음식 장바구니에 담기(contextAPI)
